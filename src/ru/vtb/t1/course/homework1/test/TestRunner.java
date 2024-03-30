@@ -68,6 +68,9 @@ public class TestRunner {
     }
 
     private static <T> void runBefore(T obj, List<Method> methods) {
+        if (methods.isEmpty()) {
+            return;
+        }
         System.out.println("-----------------------------------------------------------------------------------------");
         System.out.print("BeforeTest - ");
         methods.forEach(method -> run(obj, method));
@@ -75,6 +78,9 @@ public class TestRunner {
     }
 
     private static <T> void runAfter(T obj, List<Method> methods) {
+        if (methods.isEmpty()) {
+            return;
+        }
         System.out.println();
         System.out.print("AfterTest - ");
         methods.forEach(method -> run(obj, method));
