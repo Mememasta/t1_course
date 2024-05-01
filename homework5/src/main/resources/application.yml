@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    hikari:
+      jdbc-url: "jdbc:postgresql://localhost:5432/postgres"
+      username: "postgres"
+      password: "postgres"
+      schema: "t1_course"
+      maximum-pool-size: 10
