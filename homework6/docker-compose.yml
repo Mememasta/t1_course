@@ -1,0 +1,55 @@
+version: '3.1'
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  product:
+    container_name: product
+    image: course/product
+    environment:
+      SPRING_JDBC_URL: jdbc:postgresql://postgres:5432/postgres
+    ports:
+      - "8081:8081"
+    networks:
+      - postgres
+      - product
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  payment:
+    container_name: payment
+    image: course/payment
+    ports:
+      - "8080:8080"
+    environment:
+      INTEGRATION_PRODUCT_URL: http://product:8081
+    networks:
+      - payment
+      - product
+    depends_on:
+      - product
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge
+  product:
+    driver: bridge
+  payment:
+    driver: bridge
+
+volumes:
+  postgres:
