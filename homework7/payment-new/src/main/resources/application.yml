@@ -1,0 +1,4 @@
+integration:
+  product-client:
+    enabled: true
+    url: ${INTEGRATION_PRODUCT_URL:http://localhost:8081}

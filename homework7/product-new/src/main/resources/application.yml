@@ -1,0 +1,11 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: ${SPRING_JDBC_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${SPRING_JDBC_USERNAME:postgres}
+    password: ${SPRING_JDBC_PASSWORD:postgres}
+    hikari:
+      schema: ${SPRING_JDBC_SCHEMA:t1_course}
+      maximum-pool-size: 10
