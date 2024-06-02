@@ -36,6 +36,7 @@ public class TransferServiceImpl implements TransferService {
     }
 
     @Override
+    @Transactional
     public void replenish(Long toUserId, Long count) {
         var toUser = userService.getUser(toUserId);
         toUser.setBalance(toUser.getBalance() + count);
